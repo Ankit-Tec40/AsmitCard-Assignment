@@ -31,7 +31,7 @@ def addData():
 @app.route("/showData",methods=['POST','GET'])
 def showData():
     if request.method=="GET":
-        return render_template("GETData.html")
+        return render_template("ShowData.html")
     else:
         email=request.form.get("email")
         connection=sqlite3.connect("users.sqlite")
@@ -41,7 +41,7 @@ def showData():
         usersData=cursor.fetchall()
         print(usersData)
 
-        return render_template("GetData.html",usersData=usersData)
+        return render_template("ShowData.html",usersData=usersData)
 
 
 
