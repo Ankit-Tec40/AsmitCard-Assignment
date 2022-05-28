@@ -448,9 +448,19 @@
 
 
         <div class="btn-block">
-          <button type="submit" href="/">Add</button>
+          <a href="/"><button type="button">cancle</button></a>
+          <button type="submit">Add</button>
+
         </div>
       </form>
     </div>
+
+    {% if ping==1 %} 
+    <script>alert("Data Added Successfully")</script>
+    {% else %} {% if ping==0 %} 
+    <script>alert("Data Not Added")</script>
+    {% endif %}
+    {% endif %}
+
   </body>
 </html>

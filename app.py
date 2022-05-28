@@ -22,11 +22,14 @@ def addData():
         dataOfBirth=request.form.get("birthday")
         connection=sqlite3.connect("users.sqlite")
         cursor=connection.cursor()
-        insertQuery="""insert into users(Name,Email,ContactNumber,CourseLevel,CountryPreferences,DateOfBirth) values (?,?,?,?,?,?)"""
-        
-        cursor.execute(insertQuery,(name,email,mobNo,coursLevel,country,dataOfBirth))
-        connection.commit()
-        return("Data Added")
+        try:
+            insertQuery="""insert or replace into users(Name,Email,ContactNumber,CourseLevel,CountryPreferences,DateOfBirth) values (?,?,?,?,?,?)"""
+            pingAdded=cursor.execute(insertQuery,(name,email,mobNo,coursLevel,country,dataOfBirth))
+            connection.commit()
+            ping=1
+        except:
+            ping=0
+        return render_template("AddData.html",ping=ping)
 
 @app.route("/showData",methods=['POST','GET'])
 def showData():
